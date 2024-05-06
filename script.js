@@ -8,6 +8,8 @@ function random(num) {
 }
 let txt = "";
 
+textInput.focus();
+
 function textArr(text) {
   const textArray = text.split(",");
   console.log(text[text.length - 1]);
@@ -33,11 +35,11 @@ function randomElem() {
   elems.forEach((element) => {
     element.classList.remove("active");
   });
-  const randomElem = elems[random(elems.length - 1)];
+  const randomElem = elems[random(elems.length)];
   randomElem.classList.add("active");
   setTimeout(() => {
     randomElem.classList.remove("active");
-  }, 200);
+  }, 201);
 }
 
 window.addEventListener("keyup", (eve) => {
@@ -45,13 +47,19 @@ window.addEventListener("keyup", (eve) => {
   if (eve.key != "Enter") {
     arrElem(textArr(textInput.value));
   } else {
+    console.log(textInput.value);
+    textInput.value = "";
     const interval = setInterval(randomElem, 100);
     setTimeout(() => {
       clearInterval(interval);
-      const elems = document.querySelectorAll(".result");
-      const randomElem = elems[random(elems.length - 1)];
-      console.log(randomElem);
-      randomElem.classList.add("active");
+      setTimeout(() => {
+        const elems = document.querySelectorAll(".result");
+        const elemNum = random(elems.length);
+        // console.log(elemNum);
+        const randomElem = elems[elemNum];
+        // console.log(randomElem);
+        randomElem.classList.add("active");
+      }, 201);
     }, 2000);
   }
 });
