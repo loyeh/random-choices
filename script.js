@@ -9,17 +9,12 @@ function random(num) {
 }
 
 function textArr(text) {
-  const textArray = text.split(",");
-
-  if (text[text.length - 1] === ",") {
-    textArray.splice(-1, 1);
-  }
-  return textArray;
-}
-
-function arrElem(arr) {
+  const textArray = text
+    .split(",")
+    .filter((text) => text.trim() !== "")
+    .map((text) => text.trim());
   results.innerHTML = "";
-  arr.forEach((text) => {
+  textArray.forEach((text) => {
     const div = document.createElement("div");
     div.classList.add("result");
     div.innerText = text;
@@ -41,7 +36,7 @@ function randomElem() {
 
 window.addEventListener("keyup", (eve) => {
   if (eve.key != "Enter") {
-    arrElem(textArr(textInput.value));
+    textArr(textInput.value);
   } else {
     textInput.value = "";
     const interval = setInterval(randomElem, 100);
